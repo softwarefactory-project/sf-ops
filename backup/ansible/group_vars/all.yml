@@ -1,0 +1,5 @@
+local_backup_dir: "/var/lib/software-factory/backup"
+remote_backuped_dir: "/var/lib/software-factory/backup/"
+bup_dir: "/root/.bup"
+bup_save_name: "sf-backup"
+run_sf_backup: false
