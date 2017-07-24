@@ -1,0 +1,5 @@
+local_backup_dir: "/var/lib/software-factory/backup"
+remote_backuped_dir: "/var/lib/software-factory/backup/"
+remote_backuped_host: "localhost"
+remote_user: "root"
+bup_dir: "/root/.bup"
