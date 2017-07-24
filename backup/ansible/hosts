@@ -1,0 +1,2 @@
+[sf]
+38.145.32.196 ansible_connection=ssh        ansible_user=root
