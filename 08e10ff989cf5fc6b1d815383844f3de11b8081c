@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aa745d1_f108d093",
+        "filename": "backup/ansible/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-07-27T02:43:18Z",
+      "side": 1,
+      "message": "Could we stop using root for curl and make please? :)",
+      "revId": "08e10ff989cf5fc6b1d815383844f3de11b8081c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aa745d1_d1fdd46f",
+        "filename": "backup/ansible/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-07-27T02:43:18Z",
+      "side": 1,
+      "message": "sudo yum",
+      "revId": "08e10ff989cf5fc6b1d815383844f3de11b8081c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aa745d1_b102486e",
+        "filename": "backup/ansible/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-07-27T02:43:18Z",
+      "side": 1,
+      "message": "\u0026\u0026 sudo make install",
+      "revId": "08e10ff989cf5fc6b1d815383844f3de11b8081c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aa745d1_51f2e49b",
+        "filename": "backup/ansible/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-07-27T02:43:18Z",
+      "side": 1,
+      "message": "isn\u0027t this missing a trailing \u0027/\u0027 ?",
+      "revId": "08e10ff989cf5fc6b1d815383844f3de11b8081c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aa745d1_91f86c7e",
+        "filename": "backup/ansible/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-07-27T02:43:18Z",
+      "side": 1,
+      "message": "nit: local_dir and remote_dir sounds like better variable names.",
+      "revId": "08e10ff989cf5fc6b1d815383844f3de11b8081c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aa745d1_71f5e081",
+        "filename": "backup/ansible/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-07-27T02:43:18Z",
+      "side": 1,
+      "message": "why not using /var/lib/software-factory/bup ?",
+      "revId": "08e10ff989cf5fc6b1d815383844f3de11b8081c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aa745d1_31ef58b2",
+        "filename": "backup/ansible/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-07-27T02:43:18Z",
+      "side": 1,
+      "message": "what\u0027s the purpose of this variable? Shouldn\u0027t this be part of the local_dir ?",
+      "revId": "08e10ff989cf5fc6b1d815383844f3de11b8081c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aa745d1_112b3ced",
+        "filename": "backup/ansible/backup.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-07-27T02:43:18Z",
+      "side": 1,
+      "message": "0700",
+      "revId": "08e10ff989cf5fc6b1d815383844f3de11b8081c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
