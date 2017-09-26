@@ -34,7 +34,7 @@
   connection: local
   tasks:
     - name: "Rsync remote SF to localhost {{ local_dir }}"
-      command: "rsync --delete -r {{ sf_host }}:{{ remote_dir }} {{ local_dir }}"
+      command: "rsync --delete-delay -r {{ sf_host }}:{{ remote_dir }} {{ local_dir }}"
     - name: "Bup index"
       command: "bup index {{ local_dir }}"
       environment:
