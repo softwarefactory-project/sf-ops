@@ -16,6 +16,24 @@
       "revId": "fa9f5e1ffa7b58db234f5538a48c11425030e89e",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9abe1de1_3d604535",
+        "filename": "scripts/build-image.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2017-10-13T14:33:08Z",
+      "side": 1,
+      "message": "Yes, I will create a readme, thanks for the review",
+      "parentUuid": "9abe1de1_7dad9d87",
+      "revId": "fa9f5e1ffa7b58db234f5538a48c11425030e89e",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
     }
   ]
 }
