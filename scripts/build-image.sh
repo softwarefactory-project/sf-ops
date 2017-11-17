@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 imagename=${IMAGENAME:-sf-master.qcow2}
 release=${RELEASE:-master}
 
@@ -11,4 +13,8 @@ virt-customize -a $imagename --selinux-relabel \
                --run-command "yum install -y sf-config" \
                --run-command "mkdir /dev/shm && mount -t tmpfs shmfs /dev/shm" \
                --run-command "sfconfig --skip-setup --skip-test --skip-populate-hosts --arch /usr/share/sf-config/refarch/allinone.yaml" \
-               --run-command "rm -rf /var/lib/software-factory/*"
+               --run-command "rm -rf /var/lib/software-factory/*" \
+               --run-command "yum clean all"
+
+qemu-img convert -f qcow2 -O raw ${IMAGENAME} ${IMAGENAME}.raw
+qemu-img convert -f raw -O qcow2 -o compat=0.10 -c ${IMAGENAME}.raw ${IMAGENAME}
