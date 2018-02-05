@@ -21,8 +21,8 @@ Configure the backup playbook
 
 In *groups_var/all.yaml* change the following var for:
 
-* bup_dir: The directory where diff backup is saved. It will
-  take some disk space.
+* bup_dir: The base directory where the incremental backup is saved.
+  A bup directory named *year-month* is created under bup_dir.
 * run_sf_backup: Whether to run the sf_backup.yml playbool on the
   remote SF before fetching the backup data.
 * local_dir: Where to store the fetched data locally
@@ -43,6 +43,11 @@ Export the local node root user id_rsa.pub content inside Software Factory
 Run the playbook
 ----------------
 
+Every month the BUP_DIR is a new directory. That means a full backup
+is done every month then incremental backup is performed during the
+the current month. This is recommended by the BUP manual as support for
+pruning old backups is currently experimental.
+
 ```bash
 sudo yum install -y ansible
 sudo ansible-playbook -e"sf_host=sftests.com" backup.yml
@@ -52,7 +57,7 @@ After each run of the playbook you should see a new branch in
 bup with the date of the run.
 
 ```bash
-sudo BUP_DIR=/var/lib/backup/bup bup ls sftests.com
+sudo BUP_DIR=/var/lib/backup/bup/<year-month> bup ls sftests.com
 ```
 
 Inspect the backup
@@ -62,14 +67,14 @@ To get the listing of the content in a backup you can use the ls command
 of bup.
 
 ```bash
-sudo BUP_DIR=/var/lib/backup/bup bup ls sftests.com/latest/var/lib/software-factory/backup/gerrit/var/lib/gerrit/git/
+sudo BUP_DIR=/var/lib/backup/bup/<year-month> bup ls sftests.com/latest/var/lib/software-factory/backup/gerrit/var/lib/gerrit/git/
 ```
 
 Extract a backup
 ----------------
 
 ```bash
-sudo BUP_DIR=/var/lib/backup/bup bup restore sftests.com/latest/
+sudo BUP_DIR=/var/lib/backup/bup/<year-month> bup restore sftests.com/latest/
 ```
 
 You should find a var directory in your current directory. Then
@@ -78,7 +83,7 @@ you can rsync the content you need where you want.
 You can also retore from a specific date for instance:
 
 ```bash
-sudo BUP_DIR=/var/lib/backup/bup bup restore sftests.com/2017-07-24-151720/
+sudo BUP_DIR=/var/lib/backup/bup/<year-month> bup restore sftests.com/2017-07-24-151720/
 ```
 
 Run the backup periodically
@@ -89,3 +94,9 @@ Insert in the root crontab with *crontab -e* the following statement:
 ```bash
 0 5 * * * ansible-playbook -e sf_host=softwarefactory-project.io /root/sf-ops/backup/ansible/backup.yml
 ```
+
+Clean old backups
+-----------------
+
+Previous backups can be removed from the filesystem by deleting
+old backup directories */var/lib/backup/bup/<year-month>*.
