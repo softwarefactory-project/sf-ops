@@ -1,0 +1,91 @@
+---
+- hosts: rhel7
+  tasks:
+    - name: Prepare system
+      block:
+        - name: Register system
+          redhat_subscription:
+            state: present
+            username: sf-dev
+            password: sf-dev
+            autosubscribe: true
+            # if you are not using rh vpn, remove the 2 following lines
+            server_hostname: 'subscription.rhsm.stage.redhat.com:443/subscription'
+            rhsm_baseurl: https://cdn.redhat.com
+
+        - name: Enable extras, optional, common and scl repos
+          command: |
+            subscription-manager repos
+            --enable=rhel-7-server-optional-rpms
+            --enable=rhel-7-server-extras-rpms
+            --enable=rhel-7-server-rh-common-rpms
+            --enable rhel-server-rhscl-7-rpms
+
+        - name: Install packages
+          yum:
+            name: '{{ item }}'
+            state: present
+          with_items:
+            - https://repos.fedorapeople.org/repos/openstack/openstack-pike/rdo-release-pike-1.noarch.rpm
+            - git
+
+        # sf-release package has some depends on centos packages, using repo
+        # file instead
+        - name: Clone sf-release 3.0.0
+          git:
+            repo: https://softwarefactory-project.io/r/software-factory/sf-release
+            dest: /root/sf-release
+            version: 3.0.0
+
+        - name: Copy sf-release files
+          copy:
+            remote_src: yes
+            src: '/root/sf-release/{{ item.name }}'
+            dest: '{{ item.path }}/{{ item.name }}'
+          with_items:
+            - { name: 'sf-release.repo', path: '/etc/yum.repos.d' }
+            - { name: 'RPM-GPG-KEY-SOFTWARE-FACTORY', path: '/etc/pki/rpm-gpg' }
+
+        # python-jinja2 is present on sf-3.0 repository and breaks depends
+        # (our version is newer than the version provides by cdn)
+        - name: Ensure python-jinja2 package is exclude from update
+          ini_file:
+            path: /etc/yum.conf
+            section: main
+            option: exclude
+            value: python-jinja2
+            backup: yes
+
+        - name: Set selinux to permissive mode
+          selinux:
+            policy: targeted
+            state: permissive
+
+        - name: Update system
+          yum:
+            name: '*'
+            state: latest
+
+        # we need epel-release to install mock
+        - name: install epel
+          package:
+            name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+            state: present
+
+        - name: install packages from epel
+          package:
+            name: "{{ item }}"
+            state: present
+          with_items:
+            - mock
+
+        - name: remove epel
+          package:
+            name: epel-release
+            state: absent
+
+        - name: Install sf-config
+          yum:
+            name: sf-config
+            state: present
+      become: true
