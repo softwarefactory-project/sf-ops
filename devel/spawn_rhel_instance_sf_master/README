@@ -1,0 +1,6 @@
+* spawn and prepare sf-master on rhel7
+  You have to edit group_vars/all.yaml and hosts files to set variable for deployment
+
+  then run:
+
+  ansible-playbook -i hosts prepare_sf_install_on_rhel7.yaml
