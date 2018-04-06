@@ -1,0 +1,94 @@
+---
+- hosts: rhel7
+  tasks:
+    - name: Prepare system
+      block:
+        - name: Register system
+          redhat_subscription:
+            state: present
+            username: '{{ rh_username }}'
+            password: '{{ rh_password }}'
+            auto_attach: yes
+
+        - name: Enable extras, optional, common and scl repos
+          command: |
+            subscription-manager repos
+            --enable=rhel-7-server-optional-rpms
+            --enable=rhel-7-server-extras-rpms
+            --enable=rhel-7-server-rh-common-rpms
+            --enable rhel-server-rhscl-7-rpms
+
+        - name: Install packages
+          yum:
+            name: '{{ item }}'
+            state: present
+          with_items:
+            - https://repos.fedorapeople.org/repos/openstack/openstack-queens/rdo-release-queens-1.noarch.rpm
+            - git
+
+        # sf-release package has some depends on centos packages, using repo
+        # file instead
+        - name: Clone sf-release
+          git:
+            repo: https://softwarefactory-project.io/r/software-factory/sf-release
+            dest: /root/sf-release
+            version: "{{ sf_version | default('master') }}"
+
+        - name: Copy sf-release files
+          copy:
+            remote_src: yes
+            src: '/root/sf-release/{{ item.name }}'
+            dest: '{{ item.path }}/{{ item.name }}'
+          with_items:
+            - { name: 'sf-release.repo', path: '/etc/yum.repos.d' }
+            - { name: 'RPM-GPG-KEY-SOFTWARE-FACTORY', path: '/etc/pki/rpm-gpg' }
+
+        # python-jinja2 is present on sf-3.1 repository and breaks depends
+        # (our version is newer than the version provides by cdn)
+        - name: Ensure python-jinja2 package is exclude from update
+          ini_file:
+            path: /etc/yum.conf
+            section: main
+            option: exclude
+            value: python-jinja2
+            backup: yes
+
+        - name: Set selinux to permissive mode
+          selinux:
+            policy: targeted
+            state: permissive
+
+        - name: Update system
+          yum:
+            name: '*'
+            state: latest
+
+        # we need epel-release to install mock
+        - name: install epel
+          package:
+            name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+            state: present
+
+        - name: install packages from epel
+          package:
+            name: "{{ item }}"
+            state: present
+          with_items:
+            - mock
+
+        - name: remove epel
+          package:
+            name: epel-release
+            state: absent
+
+        - name: Install sf-config
+          yum:
+            name: sf-config
+            state: present
+
+        #- name: Fix grafana depends repository
+        #  command: sed -i 's/base,updates/rhel-7-server-rpms/' install.yml
+        #  args:
+        #    chdir: /usr/share/sf-config/ansible/roles/sf-grafana/tasks
+        #    warn: false
+      become: true

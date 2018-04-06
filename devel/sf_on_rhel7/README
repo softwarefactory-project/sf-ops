@@ -1,0 +1,7 @@
+# Install sf on rhel7
+
+Change rh_username and rh_password on group_vars/all.yaml
+Change ip address and username on host file
+
+then run:
+  ansible-playbook -i hosts install_sf_on_rhel.yaml
