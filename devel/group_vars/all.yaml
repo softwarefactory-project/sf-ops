@@ -1,0 +1,6 @@
+cloud: mycloud
+flavor: myflavor
+floating_ip: myfloatingip
+hostname: rhel7
+image: myrhelimage
+key_name: mykey

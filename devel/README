@@ -1,0 +1,5 @@
+You have to edit group_vars/all.yaml and hosts files to set variable for deployment
+
+then run:
+
+ansible-playbook -i hosts deploy_rhel7.yaml
