@@ -1,0 +1,100 @@
+---
+- hosts: rhel7
+  tasks:
+    - name: Unregister system
+      redhat_subscription:
+        state: absent
+      ignore_errors: true
+      become: true
+
+- hosts: localhost
+  tasks:
+    - name: Delete server
+      os_server:
+        cloud: '{{ cloud }}'
+        state: absent
+        name: '{{ hostname }}'
+
+    - name: Create server
+      os_server:
+        cloud: '{{ cloud }}'
+        name: '{{ hostname }}'
+        image: '{{ image }}'
+        key_name: '{{ key_name }}'
+        flavor: '{{ flavor }}'
+        floating_ips:
+          - '{{ floating_ip }}'
+
+    - name: Waiting for boot
+      wait_for:
+        port: 22
+        host: '{{ floating_ip }}'
+
+- hosts: rhel7
+  tasks:
+    - name: Prepare system
+      block:
+        - name: Register system
+          redhat_subscription:
+            state: present
+            username: sf-dev
+            password: sf-dev
+            autosubscribe: true
+            # if you are not using rh vpn, remove the 2 following lines
+            server_hostname: 'subscription.rhsm.stage.redhat.com:443/subscription'
+            rhsm_baseurl: https://cdn.redhat.com
+
+        - name: Enable extras, optional, common and scl repos
+          command: |
+            subscription-manager repos
+            --enable=rhel-7-server-optional-rpms
+            --enable=rhel-7-server-extras-rpms
+            --enable=rhel-7-server-rh-common-rpms
+            --enable rhel-server-rhscl-7-rpms
+
+        - name: Install git
+          yum:
+            name: git
+            state: present
+
+        # sf-release package has some depends on centos packages, using repo
+        # file instead
+        - name: Clone sf-release (master)
+          git:
+            repo: https://softwarefactory-project.io/r/software-factory/sf-release
+            dest: /root/sf-release
+
+        - name: Copy sf-release files
+          copy:
+            remote_src: yes
+            src: '/root/sf-release/{{ item.name }}'
+            dest: '{{ item.path }}/{{ item.name }}'
+          with_items:
+            - { name: 'sf-release.repo', path: '/etc/yum.repos.d' }
+            - { name: 'RPM-GPG-KEY-SOFTWARE-FACTORY', path: '/etc/pki/rpm-gpg' }
+
+        # Yum is present on sf-master repository, but we don't want to use it or
+        # yum will be broken is using centos version
+        - name: Ensure yum package is exclude from update
+          ini_file:
+            path: /etc/yum.conf
+            section: main
+            option: exclude
+            value: yum
+            backup: yes
+
+        - name: Set selinux to permissive mode
+          selinux:
+            policy: targeted
+            state: permissive
+
+        - name: Update system
+          yum:
+            name: '*'
+            state: latest
+
+        - name: Install sf-config
+          yum:
+            name: sf-config
+            state: present
+      become: true
