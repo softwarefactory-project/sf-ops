@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a2fa921_bcec8990",
+        "filename": "devel/rhel_sf_30/sf_30_on_rhel_75.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 201
+      },
+      "writtenOn": "2018-05-16T21:10:36Z",
+      "side": 1,
+      "message": "remove internal host",
+      "revId": "d04a6228136db70fc190f3bfe0b2aae63a6d53f9",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
