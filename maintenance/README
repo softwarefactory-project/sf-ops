@@ -1,0 +1,28 @@
+# Stop a merger
+ssh zm02 /opt/rh/rh-python35/root/bin/zuul-merger stop
+
+# Stop an executor
+ssh ze04 /opt/rh/rh-python35/root/bin/zuul-executor stop
+
+# Add a new instance
+
+## Create the instance and note the internal ip (192.168.240.X)
+
+## Update /etc/software-factory/arch.yaml with the new IP and run
+sfconfig --skip-apply
+
+## Edit the hostname and run
+ansible-playbook onboard-new-instance.yaml
+
+## Remove offending known_hosts from install-server, e.g.:
+ssh ze04
+ Offending ECDSA key in /root/.ssh/known_hosts:158
+sed -i 158d ~/.ssh/known_hosts
+
+
+# Re-create executor
+ansible-playbook spin-executor.yaml
+
+# Re-create merger
+ansible-playbook spin-executor.yaml
+

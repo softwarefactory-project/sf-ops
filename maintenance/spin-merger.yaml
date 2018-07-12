@@ -1,0 +1,50 @@
+# Playbook last run for zm02
+
+# Step1 install
+- hosts: zm02.softwarefactory-project.io
+  roles:
+  - sf-base
+  - sf-zuul
+  - sf-telegraf
+  vars:
+    role_action: install
+    zuul_services:
+    - zuul-merger
+
+# Step2: setup
+- hosts: zm02.softwarefactory-project.io
+  roles:
+  - sf-postfix
+  - sf-base
+  - sf-monit
+  - sf-zuul
+  - sf-telegraf
+  vars:
+    host_public_url: http://192.168.240.12
+    manage_etc_hosts: true
+    role_action: setup
+    zuul_services:
+    - zuul-merger
+
+# Step3: update (start zuul services)
+- hosts: install-server
+  tasks:
+  - command: git ls-remote -h {{ config_location }}
+    name: Get config sha1
+    register: configsha
+
+- any_errors_fatal: true
+  hosts: zm02.softwarefactory-project.io
+  roles:
+  - sf-repos
+  vars:
+    role_action: fetch_config_repo
+
+- hosts: zm02.softwarefactory-project.io
+  roles:
+  - sf-zuul
+  vars:
+    host_public_url: http://192.168.240.6
+    role_action: update
+    zuul_services:
+    - zuul-merger

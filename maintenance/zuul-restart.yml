@@ -1,0 +1,35 @@
+---
+- hosts: zuul-executor:zuul-merger:zuul-scheduler
+  tasks:
+    - yum:
+        name: https://softwarefactory-project.io/logs/27/12827/2/check/sf-rpm-build/a2a9ed1/buildset/rh-python35-zuul-3.1.0-4.20180629git0268285.el7.noarch.rpm
+        state: present
+
+- hosts: zuul-executor
+  tasks:
+    - command: /opt/rh/rh-python35/root/bin/zuul-executor stop
+
+- hosts: zuul-scheduler
+  tasks:
+    - command: zuul-changes.py dump --dump_file /root/zc.sh
+    - service:
+        name: rh-python35-zuul-scheduler
+        state: stopped
+
+- hosts: zuul-merger
+  tasks:
+    - service:
+        name: rh-python35-zuul-merger
+        state: restarted
+
+- hosts: zuul-executor
+  tasks:
+    - service:
+        name: rh-python35-zuul-executor
+        state: restarted
+
+- hosts: zuul-scheduler
+  tasks:
+    - service:
+        name: rh-python35-zuul-scheduler
+        state: restarted

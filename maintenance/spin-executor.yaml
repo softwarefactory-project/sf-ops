@@ -1,0 +1,70 @@
+# Playbook last run for ze04
+
+# Step1 install
+- hosts: ze04.softwarefactory-project.io
+  roles:
+  - sf-base
+  - sf-zuul
+  - sf-telegraf
+  tasks:
+    - yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - repoxplorer
+        - wait4service
+        - grafyaml
+        - managesf
+        - python2-sfmanager
+        - rh-python35-nodepool
+        - rh-python35-zuul-scheduler
+    - copy:
+        src: /usr/libexec/software-factory/sf-update-dashboard
+        dest: /usr/libexec/software-factory/sf-update-dashboard
+        mode: 0555
+    - copy:
+        src: /usr/local/bin/resources.sh
+        dest: /usr/local/bin/resources.sh
+        mode: 0555
+  vars:
+    role_action: install
+    zuul_services:
+    - zuul-executor
+
+# Step2: setup
+- hosts: ze04.softwarefactory-project.io
+  roles:
+  - sf-postfix
+  - sf-base
+  - sf-monit
+  - sf-zuul
+  - sf-telegraf
+  vars:
+    host_public_url: http://192.168.240.12
+    manage_etc_hosts: true
+    role_action: setup
+    zuul_services:
+    - zuul-executor
+
+# Step3: update (start zuul services)
+- hosts: install-server
+  tasks:
+  - command: git ls-remote -h {{ config_location }}
+    name: Get config sha1
+    register: configsha
+
+- any_errors_fatal: true
+  hosts: ze04.softwarefactory-project.io
+  roles:
+  - sf-repos
+  vars:
+    role_action: fetch_config_repo
+
+- hosts: ze04.softwarefactory-project.io
+  roles:
+  - sf-zuul
+  vars:
+    host_public_url: http://192.168.240.6
+    role_action: update
+    zuul_services:
+    - zuul-executor
