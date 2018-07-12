@@ -1,0 +1,5 @@
+- hosts: all
+  tasks:
+    - yum:
+        state: 'latest'
+        name: '*'
