@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8610ca6b_8ebd868a",
+        "filename": "backup-koji/ansible/backup.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-09-13T13:43:31Z",
+      "side": 1,
+      "message": "If bup has been installed from source, it is in /usr/local/bin. It would be nice to add the following to the environment (that\u0027s how we have it in backup.rdoproject.org):\n\nPATH: \"{{ ansible_env.PATH }}:/usr/local/bin\"",
+      "revId": "087f026ce56bbbd9d1aa7e93a627d2b4b0e0f486",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "997cd0f1_15600a79",
+        "filename": "backup-koji/ansible/backup.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-09-13T13:43:31Z",
+      "side": 1,
+      "message": "We use --delete-delay in the sf backup playbooks instead.",
+      "range": {
+        "startLine": 42,
+        "startChar": 27,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "087f026ce56bbbd9d1aa7e93a627d2b4b0e0f486",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac24759b_e797cfa3",
+        "filename": "backup-koji/ansible/backup.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-09-13T13:43:31Z",
+      "side": 1,
+      "message": "Same as above",
+      "revId": "087f026ce56bbbd9d1aa7e93a627d2b4b0e0f486",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
