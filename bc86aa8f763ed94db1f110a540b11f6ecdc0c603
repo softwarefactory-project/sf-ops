@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3e3f158_050aa528",
+        "filename": "cloud-provider-wiper/cloud-provider-wiper.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2018-09-18T07:45:22Z",
+      "side": 1,
+      "message": "It\u0027s missing a license.",
+      "revId": "bc86aa8f763ed94db1f110a540b11f6ecdc0c603",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
