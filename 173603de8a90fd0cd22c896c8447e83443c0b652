@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de91bcd0_36b2e4c5",
+        "filename": "cloud-provider-wiper/cloud-provider-wiper.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-09-18T08:39:42Z",
+      "side": 1,
+      "message": "while technically correct, this comment is confusing. We are keeping ports in DOWN state in the \"ports\" list, in order to remove them later.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 42
+      },
+      "revId": "173603de8a90fd0cd22c896c8447e83443c0b652",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
