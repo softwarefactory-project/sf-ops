@@ -16,6 +16,23 @@
       "revId": "bc86aa8f763ed94db1f110a540b11f6ecdc0c603",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cc37c31_102c1e0e",
+        "filename": "cloud-provider-wiper/cloud-provider-wiper.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2018-09-18T07:46:19Z",
+      "side": 1,
+      "message": "Maybe adds a TODO about missing stack cleanup.",
+      "revId": "bc86aa8f763ed94db1f110a540b11f6ecdc0c603",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
     }
   ]
 }
