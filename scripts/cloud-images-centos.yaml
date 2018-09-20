@@ -1,0 +1,123 @@
+- hosts: install-server
+  tasks:
+    - name: Ensure key-pair
+      os_keypair:
+        cloud: rdo-cloud
+        state: present
+        name: nodepool-builder
+        public_key_file: /root/.ssh/id_rsa.pub
+
+- hosts: nodepool-builder.softwarefactory-project.io
+  vars:
+    img_name: CentOS-7-x86_64-GenericCloud-1804_02
+  tasks:
+    - name: Deploy cloud image
+      os_server:
+        cloud: rdo-cloud
+        state: present
+        name: build-custom-centos-7
+        image: "{{ img_name }}"
+        key_name: nodepool-builder
+        wait: yes
+        flavor: m1.small
+        auto_floating_ip: yes
+        network: private
+      register: _server
+    
+    - name: Wait for SSH on the Instance
+      delegate_to: "{{ install_server_host }}"
+      command: >
+        ssh -oBatchMode=yes -oStrictHostKeyChecking=no
+        centos@{{_server.server.public_v4}} true
+      register: result
+      until: result|success
+      retries: 30
+      delay: 10
+    
+    - name: Add CentOS Instance to Inventory
+      add_host: name=cloud-image groups=cloud-image
+                ansible_ssh_host={{ _server.server.public_v4 }}
+    - name: Store server info
+      set_fact:
+        server: "{{ _server.server }}"
+
+- hosts: cloud-image
+  gather_facts: no
+  remote_user: centos
+  sudo: yes
+  tasks:
+    - name: Update packages
+      yum:
+        name: '*'
+        state: latest
+    - name: Install useful packages
+      yum:
+        name: "{{ item }}"
+      with_items:
+        - mock
+        - rpmdevtools
+        - createrepo
+        - python-jinja2
+        - rpmlint
+        - rpm-sign
+        - expect
+        - gnupg2
+        - koji
+        - git
+
+    - name: Authorize nodepool root access
+      authorized_key:
+         user: root
+         state: present
+         key: "{{ lookup('file', '/var/lib/software-factory/bootstrap-data/ssh_keys/nodepool_rsa.pub') }}"
+    - name: Create zuul-worker group
+      group:
+         name: zuul-worker
+    - name: Create zuul-worker user
+      user:
+         name: zuul-worker
+         group: zuul-worker
+         shell: /bin/bash
+         home: /home/zuul-worker
+    - name: Create zuul-worker home
+      file:
+         path: /home/zuul-worker
+         state: directory
+         mode: 0750
+         owner: zuul-worker
+         group: zuul-worker
+
+    - name: Authorize zuul-worker ssh access
+      authorized_key:
+         user: zuul-worker
+         state: present
+         key: "{{ lookup('file', '/var/lib/software-factory/bootstrap-data/ssh_keys/zuul_rsa.pub') }}"
+
+- hosts: nodepool-builder
+  tasks:
+    - name: Shutdown server
+      os_server_action:
+        action: stop
+        server: build-custom-centos-7
+        timeout: 200
+        cloud: rdo-cloud
+
+    - name: Snapshot server
+      command: /opt/rh/rh-python35/root/usr/bin/openstack server image create --name custom-centos-7 build-custom-centos-7 --wait
+      environment:
+        OS_CLOUD: rdo-cloud
+
+    - name: Terminate server
+      command: /opt/rh/rh-python35/root/usr/bin/openstack server delete build-custom-centos-7
+      environment:
+        OS_CLOUD: rdo-cloud
+
+    - name: Gather facts about image
+      os_image_facts:
+        cloud: rdo-cloud
+        image: custom-centos-7
+      register: _image
+
+    - debug: var=_image
+
+    - debug: msg="Image ready {{ _image.ansible_facts.openstack_image.id }}"
