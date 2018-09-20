@@ -1,0 +1,47 @@
+- hosts: zm03.softwarefactory-project.io:zm04.softwarefactory-project.io:ze03.softwarefactory-project.io
+  tasks:
+    - name: Fix centos var
+      copy:
+        content: "centos"
+        dest: /etc/yum/vars/contentdir
+
+    - name: Add repo packages
+      yum:
+        name: '{{ item }}'
+        state: present
+        disablerepo: '{{ yum_disable_repo|default(omit) }}'
+        enablerepo: '{{ yum_enable_repo|default(omit) }}'
+      with_items:
+        - centos-release-openstack-queens
+        - centos-release-scl-rh
+      when: ansible_distribution == "CentOS"
+
+    - name: Set 3.1 (master) repo
+      copy:
+        content: |
+          [sfrelease-master]
+          name=SF master packages
+          baseurl=http://38.145.34.53/kojifiles/repos/sf-master-el7/
+          gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SOFTWARE-FACTORY
+          gpgcheck=0
+          enabled=1
+        dest: /etc/yum.repos.d/sf-release.repo
+
+    - copy:
+        content: "3.1"
+        dest: /etc/sf-release
+    - file:
+        path:  /var/lib/software-factory/
+        state: directory
+    - copy:
+        content: "3.0"
+        dest: /var/lib/software-factory/.version
+
+    - yum:
+        name: https://softwarefactory-project.io/logs/54/12754/2/check/sf-rpm-build/41fc091/buildset/sf-config-3.1.0.144.g5d87860-3.el7.noarch.rpm
+        state: present
+        
+
+    - yum:
+        name: '*'
+        state: latest
