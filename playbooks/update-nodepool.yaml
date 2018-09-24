@@ -1,0 +1,28 @@
+---
+- hosts: nodepool-launcher
+  tasks:
+    - name: Update package
+      yum:
+        name: "{{ item }}"
+      with_items:
+        - https://softwarefactory-project.io/logs/64/13664/5/gate/sf-rpm-build/3448a32/buildset/rh-python35-nodepool-3.2.0-4.20180917gitda8a94d.el7.noarch.rpm
+        - https://softwarefactory-project.io/logs/64/13664/5/gate/sf-rpm-build/3448a32/buildset/rh-python35-nodepool-launcher-3.2.0-4.20180917gitda8a94d.el7.noarch.rpm
+
+    - name: Restart service
+      service:
+        name: rh-python35-nodepool-launcher
+        state: restarted
+
+- hosts: nodepool-builder
+  tasks:
+    - name: Update package
+      yum:
+        name: "{{ item }}"
+      with_items:
+        - https://softwarefactory-project.io/logs/64/13664/5/gate/sf-rpm-build/3448a32/buildset/rh-python35-nodepool-3.2.0-4.20180917gitda8a94d.el7.noarch.rpm
+        - https://softwarefactory-project.io/logs/64/13664/5/gate/sf-rpm-build/3448a32/buildset/rh-python35-nodepool-builder-3.2.0-4.20180917gitda8a94d.el7.noarch.rpm
+
+    - name: Restart service
+      service:
+        name: rh-python35-nodepool-builder
+        state: restarted
