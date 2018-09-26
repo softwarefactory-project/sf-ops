@@ -1,0 +1,13 @@
+- hosts: zs.softwarefactory-project.io, nodepool-builder.softwarefactory-project.io
+  gather_facts: no
+  tasks:
+    - name: Copy os-client-config
+      copy:
+        src: /etc/software-factory/clouds.yaml
+        dest: "{{ item }}/openstack/clouds.yaml"
+        owner: nodepool
+        group: nodepool
+        mode: 0400
+      with_items:
+        - /root/.config
+        - /var/lib/nodepool/.config
