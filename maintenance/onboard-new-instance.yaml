@@ -55,14 +55,8 @@
 
     - name: Ensure /var/lib/sf exists
       file:
-        path:  /var/lib/software-factory/
+        path: /var/lib/software-factory/
         state: directory
-      become: yes
-
-    - name: Force previous version
-      copy:
-        content: "3.0"
-        dest: /var/lib/software-factory/.version
       become: yes
 
     - name: Update system
