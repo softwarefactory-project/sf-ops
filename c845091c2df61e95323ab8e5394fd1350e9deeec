@@ -16,6 +16,24 @@
       "revId": "c845091c2df61e95323ab8e5394fd1350e9deeec",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93a219f0_c7823422",
+        "filename": "scripts/zk-cleaner.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2018-09-27T07:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73e18020_0572002d",
+      "revId": "c845091c2df61e95323ab8e5394fd1350e9deeec",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
     }
   ]
 }
