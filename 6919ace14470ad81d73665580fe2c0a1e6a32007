@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f417e2f8_5c5f9f94",
+        "filename": "scripts/zk-cleaner.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-01T08:10:44Z",
+      "side": 1,
+      "message": "When lot of instances are in a stale state [\u0027ready\u0027, \u0027aborted\u0027, \u0027deleting\u0027, \u0027failed\u0027] for a while (default 3hrs) and usually LOCKED in Nodepool and by effect uselessly eat tenant quota.",
+      "revId": "6919ace14470ad81d73665580fe2c0a1e6a32007",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb872227_7d0a76d6",
+        "filename": "scripts/zk-cleaner.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-01T08:10:44Z",
+      "side": 1,
+      "message": "* these *",
+      "range": {
+        "startLine": 18,
+        "startChar": 22,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "6919ace14470ad81d73665580fe2c0a1e6a32007",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
