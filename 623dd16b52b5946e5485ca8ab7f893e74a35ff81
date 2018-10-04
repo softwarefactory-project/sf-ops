@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "a4a50d7c_b7c88eb9",
+        "filename": "playbooks/sync_os_client_config.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2018-10-04T07:37:26Z",
+      "side": 1,
+      "message": "Hosts should be \"nodepool-launcher, nodepool-builder\", or just \"nodepool\". Like that, we can use the playbook on other deployment.",
+      "revId": "623dd16b52b5946e5485ca8ab7f893e74a35ff81",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70306c00_dbf29127",
         "filename": "playbooks/sync_os_client_config.yaml",
         "patchSetId": 1
