@@ -25,6 +25,7 @@
       command: "bup init"
       environment:
         BUP_DIR: "{{ current_bup_dir }}"
+        PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
       when: not bd.stat.exists
 
 - hosts: sf
@@ -42,7 +43,9 @@
       command: "bup index {{ local_dir }}"
       environment:
         BUP_DIR: "{{ current_bup_dir }}"
+        PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
     - name: "Bup save"
       command: "bup save -n {{ sf_host }} {{ local_dir }}"
       environment:
         BUP_DIR: "{{ current_bup_dir }}"
+        PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
