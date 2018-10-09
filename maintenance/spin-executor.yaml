@@ -1,7 +1,7 @@
-# Playbook last run for ze04
+# Playbook last run for ze05
 
 # Step1 install
-- hosts: ze04.softwarefactory-project.io
+- hosts: ze05.softwarefactory-project.io
   roles:
   - sf-base
   - sf-zuul
@@ -17,7 +17,6 @@
         - managesf
         - python2-sfmanager
         - rh-python35-nodepool
-        - rh-python35-zuul-scheduler
     - copy:
         src: /usr/libexec/software-factory/sf-update-dashboard
         dest: /usr/libexec/software-factory/sf-update-dashboard
@@ -32,7 +31,7 @@
     - zuul-executor
 
 # Step2: setup
-- hosts: ze04.softwarefactory-project.io
+- hosts: ze05.softwarefactory-project.io
   roles:
   - sf-postfix
   - sf-base
@@ -54,13 +53,13 @@
     register: configsha
 
 - any_errors_fatal: true
-  hosts: ze04.softwarefactory-project.io
+  hosts: ze05.softwarefactory-project.io
   roles:
   - sf-repos
   vars:
     role_action: fetch_config_repo
 
-- hosts: ze04.softwarefactory-project.io
+- hosts: ze05.softwarefactory-project.io
   roles:
   - sf-zuul
   vars:
