@@ -1,8 +1,8 @@
-- hosts: zm02.softwarefactory-project.io
+- hosts: ze05.softwarefactory-project.io
   gather_facts: no
   user: centos
   vars:
-    desired_hostname: zm02.softwarefactory-project.io
+    desired_hostname: ze05.softwarefactory-project.io
   tasks:
     - name: Authorize root ssh access
       command: sed -e 's/no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command=.echo .Please login as the user .*echo;sleep 10. //' -i /root/.ssh/authorized_keys
@@ -35,22 +35,9 @@
         - centos-release-scl-rh
       become: yes
 
-    - name: Set 3.1 (master) repo
-      copy:
-        content: |
-          [sfrelease-master]
-          name=SF master packages
-          baseurl=http://38.145.34.53/kojifiles/repos/sf-master-el7/
-          gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SOFTWARE-FACTORY
-          gpgcheck=0
-          enabled=1
-        dest: /etc/yum.repos.d/sf-release.repo
-      become: yes
-
-    - name: Force current version
-      copy:
-        content: "3.1"
-        dest: /etc/sf-release
+    - name: Install release repository
+      yum:
+        name: https://softwarefactory-project.io/repos/sf-release-3.1.rpm
       become: yes
 
     - name: Update system
