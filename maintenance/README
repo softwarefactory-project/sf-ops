@@ -11,7 +11,7 @@ ssh ze04 /opt/rh/rh-python35/root/bin/zuul-executor stop
 ## Update /etc/software-factory/arch.yaml with the new IP and run
 sfconfig --skip-apply
 
-## Edit the hostname and run
+## Edit the hostname and run (update hostname in the playbook)
 ansible-playbook onboard-new-instance.yaml
 
 ## Remove offending known_hosts from install-server, e.g.:
@@ -20,9 +20,9 @@ ssh ze04
 sed -i 158d ~/.ssh/known_hosts
 
 
-# Re-create executor
+# Re-create executor (update hostname in the playbook)
 ansible-playbook spin-executor.yaml
 
-# Re-create merger
-ansible-playbook spin-executor.yaml
+# Re-create merger (update hostname in the playbook)
+ansible-playbook spin-merger.yaml
 
