@@ -1,0 +1,10 @@
+Code-Review+2: Nicolas HICHER <nhicher@redhat.com>
+Code-Review+2: Matthieu Huin <mhuin@redhat.com>
+Code-Review+1: Javier Peña <jpena@redhat.com>
+Workflow+1: Matthieu Huin <mhuin@redhat.com>
+Verified+2: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-by: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-at: Fri, 19 Oct 2018 09:12:31 +0000
+Reviewed-on: https://softwarefactory-project.io/r/13996
+Project: software-factory/sf-ops
+Branch: refs/heads/master
