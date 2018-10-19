@@ -37,4 +37,21 @@ https://softwarefactory-project.io/zuul/t/local/status
 RDO Zuul status:
 https://review.rdoproject.org/zuul/status
 
-TODO: expand me
+## Gerrit do not replicate on github
+
+Gerrit service is hosted on managesf node, replication is managed by a gerrit plugin
+
+```
+$ ssh softwarefactory-project.io -l $username
+$ sudo  grep -E 'Replication.*started' /var/log/gerrit/replication_log | wc -l
+0
+$ sudo systemctl restart gerrit
+```
+
+After few minutes, you should be able to grep data in replication_log
+
+```
+$ sudo  grep -E 'Replication.*started' /var/log/gerrit/replication_log
+[2018-10-19 18:24:33,249] [59e6fa0c] Replication to git@github.com:redhat-cip/dci-feeder-rhel.git started...
+...
+```
