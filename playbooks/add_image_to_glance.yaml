@@ -1,0 +1,61 @@
+---
+- name: Customize the image from SF Zuul and upload it to Glance
+  hosts: localhost
+  vars:
+    - file_name: "{{ image_url | basename }}"
+    - image_name: "{{ file_name.split('.')[0] }}"
+
+  tasks:
+    - name: Obtain and extract the image
+      unarchive:
+        src: "{{ image_url }}"
+        dest: /tmp
+        copy: no
+        list_files: yes
+      register: output
+
+    - name: Prepare the zuul public SSH key
+      copy:
+        src: /var/lib/software-factory/bootstrap-data/ssh_keys/zuul_rsa.pub
+        dest: /tmp/authorized_keys
+        remote_src: yes
+
+    - name: Prepare sudoers file for zuul-worker
+      copy:
+        content: |
+          Defaults    !requiretty
+          zuul-worker ALL=(ALL) NOPASSWD:ALL
+        dest: /tmp/zuul-worker
+
+    - name: Customize the image
+      command: >
+        virt-customize -a /tmp/{{ output.files[0] }}
+        --run-command 'adduser zuul-worker'
+        --run-command 'mkdir /home/zuul-worker/.ssh'
+        --chmod '0700:/home/zuul-worker/.ssh'
+        --copy-in '/tmp/authorized_keys:/home/zuul-worker/.ssh'
+        --chmod '0600:/home/zuul-worker/.ssh/authorized_keys'
+        --run-command 'chown -R zuul-worker:zuul-worker /home/zuul-worker/.ssh/'
+        --copy-in '/tmp/zuul-worker:/etc/sudoers.d/'
+        --chmod '0440:/etc/sudoers.d/zuul-worker'
+        --run-command 'touch /.autorelabel'
+
+    - name: Upload the image to Glance
+      os_image:
+        cloud: "{{ cloud }}"
+        container-format: bare
+        disk_format: raw
+        filename: /tmp/{{ output.files[0] }}
+        name: sf-{{ image_name }}
+        state: present
+      register: image_status
+
+    - name: Remove temporary data
+      file:
+        path: /tmp/{{ item }}
+        state: absent
+      with_items:
+        - "{{ output.files[0] }}"
+        - authorized_keys
+        - zuul-worker
+      when: image_status is success
