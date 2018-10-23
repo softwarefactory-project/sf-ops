@@ -1,0 +1,37 @@
+---
+- name: Add (CentOS) image to sf-prod Glance
+  hosts: nodepool-builder
+  vars_prompt:
+    - name: "image_name"
+      prompt: "Enter the image name WITHOUT any extension (e.g. CentOS-7-x86_64-GenericCloud-1809)"
+
+  tasks:  
+    - name: Obtain the image
+      get_url:
+        url: http://cloud.centos.org/centos/7/images/{{ image_name }}.raw.tar.gz
+        dest: /tmp
+
+    - name: Extract the image
+      unarchive:
+        src: /tmp/{{ _name }}
+        dest: /tmp/
+        copy: no
+        list_files: yes
+      register: output
+
+    - name: Rename the extracted file to align names
+      copy:
+        src: /tmp/{{ output.files[0] }}
+        dest: /tmp/sf-{{ image_name }}.raw
+        remote_src: yes
+
+    - name: Obtain the zuul-worker public SSH key
+      get_url:
+        url: https://softwarefactory-project.io/keys/zuul_worker_rsa.pub
+        dest: /tmp/authorized_keys
+
+    - name: Customize the image
+      command: virt-customize -a /tmp/sf-{{ image_name }}.raw --run-command 'adduser zuul-worker' --run-command 'mkdir /home/zuul-worker/.ssh' --chmod '0700:/home/zuul-worker/.ssh' --copy-in 'authorized_keys:/home/zuul-worker/.ssh' --chmod '0600:/home/zuul-worker/.ssh/authorized_keys' --run-command 'touch /.autorelabel'
+
+    - name: Create the image in RDO cloud
+      command: openstack --os-cloud=rdo-cloud image create --disk-format raw --container-format bare --file /tmp/sf-{{ image_name }}.raw sf-{{ image_name }}
