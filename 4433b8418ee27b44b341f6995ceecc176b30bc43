@@ -59,6 +59,29 @@
     },
     {
       "key": {
+        "uuid": "23f830d2_320ceab3",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-10-24T09:15:08Z",
+      "side": 1,
+      "message": "Actually, you can combine get_url and unarchive into one unarchive call, like in the example from https://docs.ansible.com/ansible/devel/modules/unarchive_module.html#examples\n\nIn this case, it would be something like:\n\n- name: Obtain and extract the image\n  unarchive:\n    src: {{ image_url }}\n    dest: /tmp\n    list_files: yes\n    remote_src: yes\n  register: output",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "4433b8418ee27b44b341f6995ceecc176b30bc43",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2021a27_e7f6c6dc",
         "filename": "playbooks/add_image_to_sf-prod.yaml",
         "patchSetId": 1
@@ -98,6 +121,29 @@
         "startChar": 0,
         "endLine": 31,
         "endChar": 34
+      },
+      "revId": "4433b8418ee27b44b341f6995ceecc176b30bc43",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c1bd568_4d746f62",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-10-24T09:15:08Z",
+      "side": 1,
+      "message": "I think it might be a better idea to use the native os_image module: https://docs.ansible.com/ansible/devel/modules/os_image_module.html#os-image-module",
+      "range": {
+        "startLine": 37,
+        "startChar": 5,
+        "endLine": 37,
+        "endChar": 156
       },
       "revId": "4433b8418ee27b44b341f6995ceecc176b30bc43",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
