@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bba1a629_3436b710",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-24T07:57:04Z",
+      "side": 1,
+      "message": "Could it be passed as an extra: ansible-playbook -h (-e EXTRA_VARS, --extra-vars\u003dEXTRA_VARS) ?",
+      "revId": "4433b8418ee27b44b341f6995ceecc176b30bc43",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "943800a7_7a07c7e4",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-24T07:57:04Z",
+      "side": 1,
+      "message": "trailing spaces",
+      "revId": "4433b8418ee27b44b341f6995ceecc176b30bc43",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "598112e9_9689d682",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-24T07:57:04Z",
+      "side": 1,
+      "message": "The process should work every Linux images, not only centos. So better to let the user pass the full url of the image archive",
+      "range": {
+        "startLine": 11,
+        "startChar": 13,
+        "endLine": 11,
+        "endChar": 80
+      },
+      "revId": "4433b8418ee27b44b341f6995ceecc176b30bc43",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2021a27_e7f6c6dc",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-24T07:57:04Z",
+      "side": 1,
+      "message": "Why is it needed to rename the filename ? at the end that the name provided to openstack create this is important. I guess.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 23
+      },
+      "revId": "4433b8418ee27b44b341f6995ceecc176b30bc43",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eece84e7_3da1949c",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-24T07:57:04Z",
+      "side": 1,
+      "message": "We are on the nodepool-builder so we can access locally via the FS",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 34
+      },
+      "revId": "4433b8418ee27b44b341f6995ceecc176b30bc43",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
