@@ -1,37 +1,39 @@
 ---
-- name: Add (CentOS) image to sf-prod Glance
+- name: Add (any Linux) image to sf-prod Glance
   hosts: nodepool-builder
-  vars_prompt:
-    - name: "image_name"
-      prompt: "Enter the image name WITHOUT any extension (e.g. CentOS-7-x86_64-GenericCloud-1809)"
+  vars:
+    - file_name: "{{ image_url | basename }}"
+    - image_name: "{{ file_name.split('.')[0] }}"
 
   tasks:  
-    - name: Obtain the image
+    - name: Obtain and extract the image
       get_url:
-        url: http://cloud.centos.org/centos/7/images/{{ image_name }}.raw.tar.gz
+        url: "{{ image_url }}"
         dest: /tmp
-
-    - name: Extract the image
-      unarchive:
-        src: /tmp/{{ _name }}
-        dest: /tmp/
         copy: no
         list_files: yes
       register: output
 
-    - name: Rename the extracted file to align names
-      copy:
-        src: /tmp/{{ output.files[0] }}
-        dest: /tmp/sf-{{ image_name }}.raw
-        remote_src: yes
-
     - name: Obtain the zuul-worker public SSH key
       get_url:
-        url: https://softwarefactory-project.io/keys/zuul_worker_rsa.pub
+        url: https://softwarefactory-project.io/keys/zuul_rsa.pub
         dest: /tmp/authorized_keys
 
     - name: Customize the image
-      command: virt-customize -a /tmp/sf-{{ image_name }}.raw --run-command 'adduser zuul-worker' --run-command 'mkdir /home/zuul-worker/.ssh' --chmod '0700:/home/zuul-worker/.ssh' --copy-in 'authorized_keys:/home/zuul-worker/.ssh' --chmod '0600:/home/zuul-worker/.ssh/authorized_keys' --run-command 'touch /.autorelabel'
+      command: >
+        virt-customize -a /tmp/{{ output.files[0] }}
+        --run-command 'adduser zuul-worker'
+        --run-command 'mkdir /home/zuul-worker/.ssh'
+        --chmod '0700:/home/zuul-worker/.ssh'
+        --copy-in '/tmp/authorized_keys:/home/zuul-worker/.ssh'
+        --chmod '0600:/home/zuul-worker/.ssh/authorized_keys'
+        --run-command 'chown -R zuul-worker:zuul-worker /home/zuul-worker/.ssh/'
+        --run-command 'touch /.autorelabel'
 
     - name: Create the image in RDO cloud
-      command: openstack --os-cloud=rdo-cloud image create --disk-format raw --container-format bare --file /tmp/sf-{{ image_name }}.raw sf-{{ image_name }}
+      command: >
+      openstack --os-cloud=rdo-cloud image create
+      --disk-format raw
+      --container-format bare
+      --file /tmp/{{ output.files[0] }}
+      sf-{{ image_name }}
