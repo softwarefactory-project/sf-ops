@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f93c7d9_5c03354e",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-10-26T15:52:54Z",
+      "side": 1,
+      "message": "Please remove trailing spaces :)",
+      "revId": "f1de730babcfb9cdb2de02d8e2232dcd8f8c3fae",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4f11d8c_8e757b56",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-10-26T15:52:54Z",
+      "side": 1,
+      "message": "This is not going to work. You should use the unarchive module for that, see my comment on the previous patch set.",
+      "revId": "f1de730babcfb9cdb2de02d8e2232dcd8f8c3fae",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e18653cc_4190f95b",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-10-26T15:52:54Z",
+      "side": 1,
+      "message": "I think you will need to add a trailing \u0027\\\u0027 to each line, otherwise it won\u0027t work",
+      "revId": "f1de730babcfb9cdb2de02d8e2232dcd8f8c3fae",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
