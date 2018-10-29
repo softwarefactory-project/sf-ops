@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b081128d_92a40aff",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-29T08:49:35Z",
+      "side": 1,
+      "message": "Add image to Glance",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 47
+      },
+      "revId": "8a1e8d218e165e9c2925b4d144d8c9d74021bb83",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc0afc74_6c50b74c",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-29T08:49:35Z",
+      "side": 1,
+      "message": "trailing space to remove",
+      "range": {
+        "startLine": 8,
+        "startChar": 8,
+        "endLine": 8,
+        "endChar": 10
+      },
+      "revId": "8a1e8d218e165e9c2925b4d144d8c9d74021bb83",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
