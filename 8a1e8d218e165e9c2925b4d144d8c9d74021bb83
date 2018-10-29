@@ -68,6 +68,29 @@
       "revId": "8a1e8d218e165e9c2925b4d144d8c9d74021bb83",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4d44026_b3648d28",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-10-29T15:42:46Z",
+      "side": 1,
+      "message": "You need to add the sudoer file too",
+      "range": {
+        "startLine": 22,
+        "startChar": 11,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "8a1e8d218e165e9c2925b4d144d8c9d74021bb83",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
     }
   ]
 }
