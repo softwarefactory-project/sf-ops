@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "971094a2_ce84c28a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-29T08:50:55Z",
+      "side": 1,
+      "message": "Please change to something more meaningful: Add image customize playbook for Software Factory / Nodepool.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "8a1e8d218e165e9c2925b4d144d8c9d74021bb83",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b081128d_92a40aff",
         "filename": "playbooks/add_image_to_sf-prod.yaml",
         "patchSetId": 3
