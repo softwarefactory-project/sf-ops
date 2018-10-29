@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "68bf71d1_d5d30544",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-10-29T16:03:04Z",
+      "side": 1,
+      "message": "We have some minimal integration in place, if you write TG-1862 in your commit message the task will be updated on taiga automatically as it advances the gerrit pipeline.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "8a1e8d218e165e9c2925b4d144d8c9d74021bb83",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b081128d_92a40aff",
         "filename": "playbooks/add_image_to_sf-prod.yaml",
         "patchSetId": 3
