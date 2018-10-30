@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "659e2199_b2376790",
+        "filename": "doc/eng-on-duty-cookbook.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-10-30T17:22:05Z",
+      "side": 1,
+      "message": "\u0027on github\u0027 can be removed I guess the issue is not related to the remote type.",
+      "range": {
+        "startLine": 40,
+        "startChar": 26,
+        "endLine": 40,
+        "endChar": 36
+      },
+      "revId": "430c6bb3180e37ca8908798b58d8bcdcfc677abb",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
