@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb9e082e_d0539881",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-10-30T15:37:41Z",
+      "side": 1,
+      "message": "Could be great to add an example in a Readme, it\u0027s not obvious users have to add --extra-vars \u0027image_url\u003d$url\u0027",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 3
+      },
+      "revId": "54956f930437f7cb987cd45b704d9bd6353d6f48",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08f71d4b_227ea60f",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-10-30T15:37:41Z",
+      "side": 1,
+      "message": "It\u0027s not possible to launch playbook:\n\nansible-playbook playbooks/add_image_to_sf-prod.yaml --extra-vars \u0027image_url\u003dhttps://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1809.raw.tar.gz\u0027 \nERROR! Syntax Error while loading YAML.\n  could not find expected \u0027:\u0027\n\nThe error appears to have been in \u0027/home/atarakt/software-factory/sf-ops/playbooks/add_image_to_sf-prod.yaml\u0027: line 32, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n      virt-customize -a /tmp/{{ output.files[0] }}\n      --run-command \u0027adduser zuul-worker\u0027\n      ^ here\n\nYou have to add \u0027\\\u0027 at the end of line",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 13
+      },
+      "revId": "54956f930437f7cb987cd45b704d9bd6353d6f48",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b0de11a_eee5c56c",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-10-30T15:37:41Z",
+      "side": 1,
+      "message": "You should use \u0027os_image\u0027 module to update the image",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 25
+      },
+      "revId": "54956f930437f7cb987cd45b704d9bd6353d6f48",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf560e00_b5b27170",
+        "filename": "playbooks/add_image_to_sf-prod.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-10-30T15:37:41Z",
+      "side": 1,
+      "message": "trailing space",
+      "range": {
+        "startLine": 51,
+        "startChar": 42,
+        "endLine": 51,
+        "endChar": 43
+      },
+      "revId": "54956f930437f7cb987cd45b704d9bd6353d6f48",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
