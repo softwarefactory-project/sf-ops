@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0b013bc_7c69c7d2",
+        "filename": "playbooks/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-10-31T15:13:38Z",
+      "side": 1,
+      "message": "trailing space",
+      "range": {
+        "startLine": 3,
+        "startChar": 90,
+        "endLine": 3,
+        "endChar": 91
+      },
+      "revId": "f6c1b8c778161fea61df3b9d3115a7aa745ac739",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "087e4c65_28c88e05",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-10-31T15:13:38Z",
+      "side": 1,
+      "message": "you could set it to localhost, error when running on nodepool-builder node:\n\n[root@nodepool-builder.softwarefactory-project.io tmp]# ansible-playbook add_image_to_glance.yaml --extra-vars \u0027image_url\u003dhttps://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1809.raw.tar.gz\u0027\n [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match \u0027all\u0027\n\n [WARNING]: Could not match supplied host pattern, ignoring: nodepool-builder\n\n\nPLAY [Add image to Glance] *********************************************************************************************************\nskipping: no hosts matched\n\nPLAY RECAP *************************************************************************************************************************\n\n[root@nodepool-builder.softwarefactory-project.io tmp]#",
+      "range": {
+        "startLine": 3,
+        "startChar": 9,
+        "endLine": 3,
+        "endChar": 25
+      },
+      "revId": "f6c1b8c778161fea61df3b9d3115a7aa745ac739",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "475e6628_45cd9f24",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-10-31T15:13:38Z",
+      "side": 1,
+      "message": "could you have a look to my and jpena previous comments to use os_image instead command ?",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 13
+      },
+      "revId": "f6c1b8c778161fea61df3b9d3115a7aa745ac739",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
