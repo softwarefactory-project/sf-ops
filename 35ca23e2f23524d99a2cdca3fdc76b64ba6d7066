@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07f8dabb_6db9bf0b",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-11-05T16:46:22Z",
+      "side": 1,
+      "message": "There is a deprecation warning with this syntax:\n\nwarning: Instead of using `result|success` instead use `result is success`.",
+      "range": {
+        "startLine": 60,
+        "startChar": 12,
+        "endLine": 60,
+        "endChar": 32
+      },
+      "revId": "35ca23e2f23524d99a2cdca3fdc76b64ba6d7066",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
