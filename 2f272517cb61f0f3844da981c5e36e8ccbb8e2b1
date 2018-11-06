@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "159be587_f7dbf486",
+        "filename": "playbooks/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-11-06T08:28:30Z",
+      "side": 1,
+      "message": "We must stay generic and avoid names related to our main deployment of SF. So please replace this by only: \"From the Software Factory install-server node.\"",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 71
+      },
+      "revId": "2f272517cb61f0f3844da981c5e36e8ccbb8e2b1",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6a5f64b_a072d8b9",
+        "filename": "playbooks/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-11-06T08:28:30Z",
+      "side": 1,
+      "message": "the playbook is named add_image_to_glance.yaml",
+      "range": {
+        "startLine": 7,
+        "startChar": 129,
+        "endLine": 7,
+        "endChar": 155
+      },
+      "revId": "2f272517cb61f0f3844da981c5e36e8ccbb8e2b1",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df4cd890_7f8fad27",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-11-06T08:28:30Z",
+      "side": 1,
+      "message": "Maybe \"Customize image from SF Zuul and upload in Glance\"",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "2f272517cb61f0f3844da981c5e36e8ccbb8e2b1",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4798f57_1bd67c57",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-11-06T08:28:30Z",
+      "side": 1,
+      "message": "This is not generic. The key can be accessed from the disk directly and is located here: /var/lib/software-factory/bootstrap-data/ssh_keys/zuul_rsa.pub. Use the copy module with remote_src.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "2f272517cb61f0f3844da981c5e36e8ccbb8e2b1",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "825e291a_cbbeeae9",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-11-06T08:28:30Z",
+      "side": 1,
+      "message": "Change to \"Upload the image to Glance\"",
+      "range": {
+        "startLine": 42,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 41
+      },
+      "revId": "2f272517cb61f0f3844da981c5e36e8ccbb8e2b1",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff85baf5_b81d8b3d",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-11-06T08:28:30Z",
+      "side": 1,
+      "message": "replace by \u0027{{ cloud }}\u0027 and add the usage in the README file.",
+      "range": {
+        "startLine": 44,
+        "startChar": 17,
+        "endLine": 44,
+        "endChar": 26
+      },
+      "revId": "2f272517cb61f0f3844da981c5e36e8ccbb8e2b1",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c7218a8_a43a2275",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-11-06T08:28:30Z",
+      "side": 1,
+      "message": "Replace by \"Remove temporary data\"",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 42
+      },
+      "revId": "2f272517cb61f0f3844da981c5e36e8ccbb8e2b1",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
