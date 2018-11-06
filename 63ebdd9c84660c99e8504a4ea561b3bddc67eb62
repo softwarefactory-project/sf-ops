@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b58852fc_754d1792",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-11-06T17:14:10Z",
+      "side": 1,
+      "message": "This task should be the first executed and the playbook should stop if the image exists",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "63ebdd9c84660c99e8504a4ea561b3bddc67eb62",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
