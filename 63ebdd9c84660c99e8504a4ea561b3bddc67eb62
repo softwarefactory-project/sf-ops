@@ -69,6 +69,30 @@
       "revId": "63ebdd9c84660c99e8504a4ea561b3bddc67eb62",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcd3d656_23724e8a",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2018-11-07T16:43:10Z",
+      "side": 1,
+      "message": "It\u0027s not easy to manage update. We got issue when deleting previous image. Normally we should not have to update image because we use version provides by centos https://softwarefactory-project.io/cgit/config/tree/nodepool/rdo-cloud.yaml#n121",
+      "parentUuid": "1860ffa5_c6c2b252",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "63ebdd9c84660c99e8504a4ea561b3bddc67eb62",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
     }
   ]
 }
