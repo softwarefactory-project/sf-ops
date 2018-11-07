@@ -22,6 +22,30 @@
       "revId": "63ebdd9c84660c99e8504a4ea561b3bddc67eb62",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1860ffa5_c6c2b252",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-11-07T09:15:54Z",
+      "side": 1,
+      "message": "What if we want to update the image ? The image is already into glance and we want to re-upload ? Should we have a \"force\" extra_var to, if set to true (false by default): removes the image from glance (state: absent) then uploads image to glance (state: present).\nThat\u0027s true this mechanic must be done first.\n\nBut well, I think for this patch that\u0027s fine. We\u0027ll be able to iterate on it later. So for now I think you can remove the Verify presence task.",
+      "parentUuid": "b58852fc_754d1792",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "63ebdd9c84660c99e8504a4ea561b3bddc67eb62",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
     }
   ]
 }
