@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "06f44ab6_8b9ed66a",
+        "filename": "playbooks/add_image_to_glance.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 200
+      },
+      "writtenOn": "2018-11-07T10:05:01Z",
+      "side": 1,
+      "message": "Small nit: while this will work fine, we should use \"remote_src: yes\" instead of \"copy: no\", since this option is deprecated in Ansible. See https://docs.ansible.com/ansible/2.6/modules/unarchive_module.html",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 16
+      },
+      "revId": "63ebdd9c84660c99e8504a4ea561b3bddc67eb62",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b58852fc_754d1792",
         "filename": "playbooks/add_image_to_glance.yaml",
         "patchSetId": 9
