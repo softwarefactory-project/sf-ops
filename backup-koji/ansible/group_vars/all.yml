@@ -5,5 +5,5 @@ www_dir: "/var/www/html/sfkoji/repos/"
 pub_server: "backup.rdoproject.org"
 sf_releases:
   - sf-master-el7
+  - sf-3.2-el7-release
   - sf-3.1-el7-release
-  - sf-3.0-el7-release
