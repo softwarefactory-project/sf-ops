@@ -53,6 +53,6 @@
         BUP_DIR: "{{ current_bup_dir }}"
         PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
 
-    - name: "Rsync koji {{ local_dir }}/koji/repo/{{ item }} to publication server {{ pub_server }} {{ www_dir }}"
-      command: "rsync -a --delete-delay -e 'ssh -p 3300' {{ local_dir }}/koji/repos/{{ item }} sfrepos@{{ pub_server }}:{{ www_dir }}"
+    - name: "Rsync koji {{ local_dir }}/koji/repo/{{ item }} {{ www_dir }}"
+      command: "rsync -a --delete-delay {{ local_dir }}/koji/repos/{{ item }} {{ www_dir }}"
       with_items: "{{ sf_releases }}"
