@@ -31,70 +31,114 @@ import shade
 parser = argparse.ArgumentParser(description="Clean ZK nodepool database tool")
 parser.add_argument('--provider', help="only clean this provider")
 parser.add_argument('--label', help="only clean this label")
-parser.add_argument('--min-age', type=int, default=3 * 3600, help="minimum node age in seconds")
+parser.add_argument('--min-age', type=int, default=24 * 3600, help="minimum node age in seconds")
 parser.add_argument('--dry', default=False, action='store_true', help="Do not write anything, dry run")
+parser.add_argument('--requests', action='store_true', help="clean requests list instead")
 parser.add_argument('nodeid', nargs='*')
 args = parser.parse_args()
 
+now = time.time()
 max_age = time.time() - args.min_age
 clouds = {}
 
 client = kazoo.client.KazooClient(hosts="zookeeper")
 client.start()
 
-if not args.nodeid:
-    args.nodeid = client.get_children("/nodepool/nodes")
+base_path = "/nodepool/nodes"
+if args.requests:
+    base_path = "/nodepool/requests"
 
-for nodeid in args.nodeid:
-    node_path = os.path.join("/nodepool/nodes", nodeid)
+if not args.nodeid:
+    args.nodeid = client.get_children(base_path)
+
+
+for nodeid in sorted(args.nodeid):
+    node_path = os.path.join(base_path, nodeid)
+    print("\n===> %s <===" % node_path)
     if not client.exists(node_path):
-        print("%s: doesn't exists" % node_path)
+        print("Node path doesn't exists")
         continue
-    node_data = client.get(node_path)[0].decode('utf-8')
+
+    node_zk = client.get(node_path)
+    node_age = now - node_zk[1].mtime / 1000
+    if node_age < args.min_age:
+        print("Skipping recent node (%d)" % node_age)
+        continue
+
+    if args.requests:
+        lock_path = os.path.join("/nodepool/requests-lock", nodeid)
+    else:
+        lock_path = os.path.join("/nodepool/nodes/lock", nodeid)
+    if client.exists(lock_path):
+        lock_zk = client.get(lock_path)
+        lock_age = now - lock_zk[1].mtime / 1000
+        if lock_age < args.min_age:
+            print("Skipping recent lock (%d)" % lock_age)
+            continue
+    else:
+        lock_path = None
+
+    node_data = node_zk[0].decode('utf-8')
     try:
         node = json.loads(node_data)
-    except Exception as e:
-        print("%s: decode failed (%s)" % (node_path, e))
+    except json.decoder.JSONDecodeError as e:
+        print("Removing node because decode fail '%s' (%s)" % (node_data, e))
+        if not args.dry:
+            if lock_path:
+                client.delete(lock_path, recursive=True)
+            client.delete(node_path, recursive=True)
         continue
 
-    if node['state'] not in ('ready', 'aborted', 'deleting', 'failed'):
-        print("%s: skipping node state %s" % (node_path, node['state']))
+    if node['state'] in ('in-use',):
+        print("Skipping node state %s" % node['state'])
         continue
 
     if node['state_time'] > max_age:
-        print("%s: node too young" % node_path)
+        print("Skipping recent node state time (%d)" % node['state_time'])
         continue
 
-    cloud = node['provider']
-    if args.provider and args.provider != cloud:
-        print("%s: skipping filtered provider %" % (node_path, cloud))
+    if args.requests:
+        print("Removing request ZK node from %s..." % time.ctime(node['state_time']))
+        if not args.dry:
+            client.delete(node_path, recursive=True)
+            if lock_path and client.exists(lock_path):
+                client.delete(lock_path, recursive=True)
+        continue
+
+    provider = node['provider']
+    if args.provider and args.provider != provider:
+        print("Skipping filtered provider %s" % provider)
         continue
 
     if args.label and args.label not in node['type']:
-        print("%s: skipping filtered labels %s" % (node_path, node['type']))
+        print("Skipping filtered labels %s" % node['type'])
         continue
 
-    print()
-    print("=" * 80)
     print("Name: %s" % node['hostname'])
     print("Age: %s" % (time.time() - node['state_time']))
     print("Label: %s" % node['type'])
-    if cloud not in clouds:
+    print("Provider: %s" % node['provider'])
+    print("Pool: %s" % node['pool'])
+    print("State: %s" % node['state'])
+    if provider not in clouds:
         try:
-            clouds[cloud] = shade.openstack_cloud(cloud=cloud)
+            clouds[provider] = shade.openstack_cloud(cloud=provider)
         except:
-            print("%s: couldn't get cloud" % cloud)
-            continue
-    print("%s: removing server %s" % (node_path, node['external_id']))
-    try:
-        if not args.dry:
-            clouds[cloud].delete_server(node['external_id'])
-        if False:
-            print("%s: delete failed" % node['external_id'])
-    except:
-        print("%s: couldn't delete server" % node['external_id'])
+            print("Couldn't get cloud client")
+            clouds[provider] = None
 
-    print("%s: removing..." % node_path)
+    if clouds[provider]:
+        print("Removing cloud server %s" % node['external_id'])
+        try:
+            if not args.dry:
+                clouds[provider].delete_server(node['external_id'])
+            if False:
+                print("%s: delete failed" % node['external_id'])
+        except:
+            print("%s: couldn't delete server" % node['external_id'])
+
+    print("Removing the ZK node...")
     if not args.dry:
         client.delete(node_path, recursive=True)
-    print()
+        if lock_path and client.exists(lock_path):
+           client.delete(lock_path, recursive=True)
