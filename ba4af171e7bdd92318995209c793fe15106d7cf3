@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b207cd7_d9b9f0f0",
+        "filename": "scripts/zk-cleaner.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2018-12-04T08:24:10Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 135,
+        "startChar": 12,
+        "endLine": 135,
+        "endChar": 21
+      },
+      "revId": "ba4af171e7bdd92318995209c793fe15106d7cf3",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
