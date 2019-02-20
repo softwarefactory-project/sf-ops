@@ -135,7 +135,7 @@ for nodeid in sorted(args.nodeid):
         print("Removing cloud server %s" % node['external_id'])
         try:
             if not args.dry:
-                ret = clouds[provider].delete_server(node['external_id'])
+                ret = clouds[provider].delete_server(node['external_id'], force=True)
             if not ret:
                 print("%s: delete failed" % node['external_id'])
         except Exception:

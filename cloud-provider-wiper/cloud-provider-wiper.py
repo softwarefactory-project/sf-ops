@@ -38,13 +38,16 @@ parser.add_argument(
     '--os-cloud', type=str,
     help="Cloud name as in clouds.yaml")
 parser.add_argument(
-    '--servers-to-exclude', type=str, default="",
+    '--servers-to-exclude', type=str,
     help="Comma separated list of servers to exclude." +
          "Attached ports and volumes will be excluded too.")
 
 args = parser.parse_args()
 
-servers_to_exclude = args.servers_to_exclude.split(',')
+if args.servers_to_exclude:
+    servers_to_exclude = args.servers_to_exclude.split(',')
+else:
+    servers_to_exclude = []
 servers_to_exclude_objs = []
 
 input("Press enter to continue - We are going to discover resources to wipe")
@@ -53,8 +56,10 @@ input("Press enter to continue - We are going to discover resources to wipe")
 cloud = shade.openstack_cloud(cloud=args.os_cloud)
 servers = cloud.list_servers()
 ports = cloud.list_ports()
-if args.skip_volumes:
+if not args.skip_volumes:
     volumes = cloud.list_volumes()
+else:
+    volumes = []
 router = cloud.list_routers()[0]
 router_interface = cloud.list_router_interfaces(router)[0]
 
@@ -64,7 +69,7 @@ for server_excluded in servers_to_exclude:
         list(filter(lambda x: x['name'] == server_excluded, servers))[0])
 servers = list(filter(lambda x: x["name"] not in servers_to_exclude, servers))
 
-if args.volumes:
+if not args.skip_volumes:
     # Remove excluded server volume from volumes list
     for server_excluded in servers_to_exclude:
         volumes = list(

@@ -9,7 +9,7 @@ client.start()
 
 def print_root(root):
     childs = client.get_children(root)
-    for child in childs[:5]:
+    for child in childs:
         print(os.path.join(root, child))
         print_root(os.path.join(root, child))
 
