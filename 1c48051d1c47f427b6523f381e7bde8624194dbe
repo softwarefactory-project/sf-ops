@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36980245_bd6e1539",
+        "filename": "scripts/zk-helper.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2019-06-06T08:59:26Z",
+      "side": 1,
+      "message": "Why do we need to remove this lock too ?",
+      "range": {
+        "startLine": 60,
+        "startChar": 33,
+        "endLine": 60,
+        "endChar": 55
+      },
+      "revId": "1c48051d1c47f427b6523f381e7bde8624194dbe",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
