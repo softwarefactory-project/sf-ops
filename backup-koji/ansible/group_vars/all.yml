@@ -4,5 +4,5 @@ bup_dir: "/var/lib/backup/bup-koji/"
 www_dir: "/var/www/html/sfkoji/repos/"
 sf_releases:
   - sf-master-el7
-  - sf-3.2-el7-release
-  - sf-3.1-el7-release
+  - sf-3.4-el7-release
+  - sf-3.3-el7-release
