@@ -1,0 +1,12 @@
+- hosts: nodepool-builder
+  tasks:
+    - name: Install script
+      copy:
+        src: manage_upstream_config_repo.yaml
+        dest: /opt/manage_upstream_config_repo.yaml
+
+    - name: Install crontab to update project-config repo
+      cron:
+        name: Update project-config repo
+        hour: 1
+        job: "systemd-cat ansible-playbook -i 'localhost,' /opt/manage_upstream_config_repo.yaml"
