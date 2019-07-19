@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88b98870_63dd57bb",
+        "filename": "playbooks/builder-manage-config-project.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2019-07-19T18:49:38Z",
+      "side": 1,
+      "message": "i didn\u0027t knew that command, nice!",
+      "range": {
+        "startLine": 12,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "b0e5dc455075af5092a142ecd0abe8d090d31c9e",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
