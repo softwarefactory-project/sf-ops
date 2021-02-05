@@ -1,4 +1,6 @@
 sf_host: "softwarefactory-project.io"
+sf_hosts:
+  - "softwarefactory-project.io"
 local_dir: "/var/lib/backup/{{ sf_host }}/"
 remote_dir: "/var/lib/software-factory/backup/"
 bup_dir: "/var/lib/backup/bup/"
