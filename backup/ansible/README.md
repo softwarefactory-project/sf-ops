@@ -28,9 +28,12 @@ In *groups_var/all.yaml* change the following var for:
 * local_dir: Where to store the fetched data locally
 * remote_dir: Location of the backup on the remote SF.
 * sf_host: The hostname or IP of the remote SF.
+* sf_hosts: The hostnames or IP adresses of the remote host (required when
+            not all desired services are on the same host).
 
 ```yaml
 sf_host: "sftests.com"
+sf_hosts:
 local_dir: "/var/lib/backup/{{ sf_host }}/"
 remote_dir: "/var/lib/software-factory/backup/"
 bup_dir: "/var/lib/backup/bup/"

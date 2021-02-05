@@ -1,10 +1,11 @@
 - hosts: localhost
   connection: local
   tasks:
-    - name: "Add {{ sf_host }} to the inventory"
+    - name: "Add {{ item }} to the inventory"
       add_host:
-        name: "{{ sf_host }}"
+        name: "{{ item }}"
         groups: "sf"
+      loop: "{{ sf_hosts }} | default(sf_host)"
     - name: "Set current_bup_dir"
       set_fact:
         current_bup_dir: "{{ bup_dir }}/{{ ansible_date_time.year }}-{{ ansible_date_time.month }}"
@@ -38,7 +39,8 @@
   connection: local
   tasks:
     - name: "Rsync remote SF to localhost {{ local_dir }}"
-      command: "rsync --delete-delay -r {{ sf_host }}:{{ remote_dir }} {{ local_dir }}"
+      command: "rsync --delete-delay -r {{ item }}:{{ remote_dir }} {{ local_dir }}"
+      loop: "{{ sf_hosts | default(sf_host) }}"
     - name: "Bup index"
       command: "bup index {{ local_dir }}"
       environment:
