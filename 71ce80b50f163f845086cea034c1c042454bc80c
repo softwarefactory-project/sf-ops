@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa8e5470_0c7dcad2",
+        "filename": "backup/ansible/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 201
+      },
+      "writtenOn": "2021-02-05T19:03:04Z",
+      "side": 1,
+      "message": "@Tristan sorry for blast from the past, I\u0027m digging into history to understand how was bup chosen as a backup tool?\n\nopendev infra has moved to Borg and I\u0027d like to open a userstory to move RDO/SF to Borg, in order to keep tooling in sync.",
+      "range": {
+        "startLine": 5,
+        "startChar": 40,
+        "endLine": 5,
+        "endChar": 43
+      },
+      "revId": "71ce80b50f163f845086cea034c1c042454bc80c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
