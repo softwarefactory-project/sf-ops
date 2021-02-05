@@ -22,6 +22,30 @@
       "revId": "71ce80b50f163f845086cea034c1c042454bc80c",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "306745dc_e1d4336d",
+        "filename": "backup/ansible/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2021-02-05T19:18:24Z",
+      "side": 1,
+      "message": "IIRC the team was more comfortable with bup, and I think that was what upstream used before moving to borg.",
+      "parentUuid": "fa8e5470_0c7dcad2",
+      "range": {
+        "startLine": 5,
+        "startChar": 40,
+        "endLine": 5,
+        "endChar": 43
+      },
+      "revId": "71ce80b50f163f845086cea034c1c042454bc80c",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
     }
   ]
 }
