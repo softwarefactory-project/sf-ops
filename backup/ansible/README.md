@@ -27,11 +27,13 @@ In *groups_var/all.yaml* change the following var for:
   remote SF before fetching the backup data.
 * local_dir: Where to store the fetched data locally
 * remote_dir: Location of the backup on the remote SF.
-* sf_host: The hostname or IP of the remote SF.
+* sf_hosts: The hostnames or IP adresses of the remote host (required when
+            not all desired services are on the same host).
 
 ```yaml
-sf_host: "sftests.com"
-local_dir: "/var/lib/backup/{{ sf_host }}/"
+sf_hosts:
+  - "sftests.com"
+local_dir: "/var/lib/backup/{{ sf_hosts[0] }}/"
 remote_dir: "/var/lib/software-factory/backup/"
 bup_dir: "/var/lib/backup/bup/"
 run_sf_backup: true
@@ -50,7 +52,7 @@ pruning old backups is currently experimental.
 
 ```bash
 sudo yum install -y ansible
-sudo ansible-playbook -e"sf_host=sftests.com" backup.yml
+sudo ansible-playbook -e '{"sf_hosts": ["sftests.com"]}' backup.yml
 ```
 
 After each run of the playbook you should see a new branch in
@@ -92,7 +94,7 @@ Run the backup periodically
 Insert in the root crontab with *crontab -e* the following statement:
 
 ```bash
-0 5 * * * ansible-playbook -e sf_host=softwarefactory-project.io /root/sf-ops/backup/ansible/backup.yml
+0 5 * * * ansible-playbook -e '{"sf_hosts": ["softwarefactory-project.io"]}' /root/sf-ops/backup/ansible/backup.yml
 ```
 
 Clean old backups
