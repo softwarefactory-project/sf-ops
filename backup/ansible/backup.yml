@@ -38,8 +38,8 @@
 - hosts: localhost
   connection: local
   tasks:
-    - name: "Rsync remote SF to localhost {{ local_dir }}"
-      command: "rsync --delete-delay -r {{ item }}:{{ remote_dir }} {{ local_dir }}"
+    - name: "Rsync remote hosts to localhost {{ local_dir }}"
+      command: "rsync --delete-delay -r {{ item }}:{{ remote_dir }} {{ local_dir }}/{{ item }}"
       loop: "{{ sf_hosts }}"
     - name: "Bup index"
       command: "bup index {{ local_dir }}"
