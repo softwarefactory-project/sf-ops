@@ -1,0 +1,8 @@
+Code-Review+2: Javier Peña <jpena@redhat.com>
+Workflow+1: Daniel Pawlik <dpawlik@redhat.com>
+Verified+2: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-by: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-at: Thu, 11 Feb 2021 10:26:54 +0000
+Reviewed-on: https://softwarefactory-project.io/r/20987
+Project: software-factory/sf-ops
+Branch: refs/heads/master
