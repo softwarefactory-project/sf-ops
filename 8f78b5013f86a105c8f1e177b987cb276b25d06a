@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c85c291_4d9db54c",
+        "filename": "scripts/debug-node-failure.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 22
+      },
+      "writtenOn": "2021-02-17T14:24:45Z",
+      "side": 1,
+      "message": "trailing spaces, an issue with your emacs setup? \u003d)",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 4
+      },
+      "revId": "8f78b5013f86a105c8f1e177b987cb276b25d06a",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
