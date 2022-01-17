@@ -1,0 +1,29 @@
+- hosts: all
+  tasks:
+    - name: Install repo
+      copy:
+        dest: /etc/yum.repos.d/gerrit-3.4.repo
+        content: |
+          [gerrit-3.4]
+          name=gerrit 3.4 packages
+          baseurl=https://softwarefactory-project.io/logs/54/23354/6/check/sf-rpm-build/0fae238/
+          gpgcheck=0
+          enabled=1
+
+          # this version is needed because a more recent pynotedb got installed
+          [pynotedb]
+          name=pynotedb
+          baseurl=https://softwarefactory-project.io/logs/07/23607/4/check/sf-rpm-build/0ffbcef/buildset/
+          gpgcheck=0
+          enabled=1
+
+- hosts: install-server
+  tasks:
+    - name: update sf-config
+      yum:
+        name: sf-config
+        state: latest
+
+    - name: run sfconfig --upgrade
+      debug:
+        msg: "echo and now run sfconfig --upgrade"
