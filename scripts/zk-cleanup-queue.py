@@ -33,6 +33,8 @@ parser.add_argument('--host', help="Specify zookeeper host",
 parser.add_argument('--all', help="Remove all events no matter what is "
                     "the type",
                     action="store_true")
+parser.add_argument('--recursive', help="Remove queue reqursive",
+                    action="store_true")
 parser.add_argument('--type', help="Remove specific event type"
                     "e.g. ref-replication-scheduled or dropped-output ")
 parser.add_argument('--refstatus', help="Remove specific ref status"
@@ -49,7 +51,7 @@ print("Current lenght of the queue %s is %s" % (args.queue, len(patches)))
 if args.all:
     for p in patches:
         try:
-            client.delete(p)
+            client.delete(p, recursive=args.recursive)
         except kazoo.exceptions.NoNodeError:
             print("Can not remove %s" % p)
 elif args.type or args.refstatus:
@@ -60,6 +62,6 @@ elif args.type or args.refstatus:
             if (jdata.get('type', '') == args.type) or (
                     jdata.get('refStatus', '') == args.refstatus):
                 print("Cleaning %s that contain %s" % (p, jdata))
-                client.delete(p)
+                client.delete(p, recursive=args.recursive)
         except kazoo.exceptions.NoNodeError:
             print("Can not remove %s" % p)
