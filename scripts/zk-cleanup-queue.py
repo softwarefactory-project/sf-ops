@@ -33,12 +33,14 @@ parser.add_argument('--host', help="Specify zookeeper host",
 parser.add_argument('--all', help="Remove all events no matter what is "
                     "the type",
                     action="store_true")
-parser.add_argument('--recursive', help="Remove queue reqursive",
+parser.add_argument('--recursive', help="Remove queue recursive",
                     action="store_true")
 parser.add_argument('--type', help="Remove specific event type"
                     "e.g. ref-replication-scheduled or dropped-output ")
 parser.add_argument('--refstatus', help="Remove specific ref status"
                     "eg. NON_EXISTING")
+parser.add_argument('--unlock', help="Remove lock on queue",
+                    action="store_true")
 args = parser.parse_args()
 
 client = kazoo.client.KazooClient(hosts=args.host)
@@ -49,6 +51,13 @@ patches = list(map(lambda n: args.queue.rstrip("/") + "/" + n, events))
 print("Current lenght of the queue %s is %s" % (args.queue, len(patches)))
 
 if args.all:
+    if args.unlock:
+        try:
+            # NOTE: yes, do it twice!
+            client.Lock(args.queue).acquire(timeout=1)
+            client.Lock(args.queue).acquire(timeout=1)
+        except kazoo.exceptions.LockTimeout:
+            client.delete(args.queue, recursive=True)
     for p in patches:
         try:
             client.delete(p, recursive=args.recursive)
