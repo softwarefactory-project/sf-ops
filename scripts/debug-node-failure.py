@@ -43,15 +43,15 @@ def main():
     regexp = re.compile("DEBUG zuul\.Pipeline\.[^:]+: .* "
                         "Adding node request <NodeRequest ([0-9-]+) .* for job "
                         + args.job + " to item .* " + args.project
-                        + " " + args.change + ">")
+                        + " " + args.change + ".*>")
 
     start = time.monotonic()
     idx = 0
     print("Looking for nodeset in scheduler log:")
     nodesets = []
-    with open("/var/log/zuul/scheduler.log") as zlog:
+    with open("/var/log/zuul/scheduler.log", 'rb') as zlog:
         while True:
-          line = zlog.readline()
+          line = zlog.readline().decode('utf8', errors='ignore')
           if not line:
             break
           match = regexp.match(line[24:])
