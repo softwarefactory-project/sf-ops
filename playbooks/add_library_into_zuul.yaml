@@ -1,0 +1,15 @@
+---
+# NOTE: The password_hash filter is not working for generating bcrypt password
+# in the current Zuul release, due there is no passlib library installed.
+# More info: https://github.com/ansible/ansible/issues/77808
+- hosts: zuul-executor
+  vars:
+    zuul_additional_packages:
+      - passlib
+  tasks:
+    - name: Install additional libraries
+      become: true
+      shell: "podman exec -it zuul-executor /var/lib/zuul/ansible-bin/{{ item }}/bin/pip3 install {{ zuul_additional_packages | join(' ') }}"
+      loop:
+        - 2.9
+        - 2.8
