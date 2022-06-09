@@ -15,6 +15,12 @@
 """This script looks for noderequest in zuul log and get the
    associated nodepool launcher logs"""
 
+# To check image status, you can do:
+# Collect request id:
+#  grep cloud-centos-9  /var/log/nodepool/launcher.log | sed 's/.*\[e: \([^ ]*\).*/\1/g' | sed 's/.$//' | sort -u > req
+# Check for result:
+#  for i in $(cat req); do grep "$i.* Node is ready" /var/log/nodepool/launcher.log; done
+
 import time
 import re
 import argparse
@@ -41,9 +47,9 @@ def print_nodepool_log(nodesets):
 def main():
     args = usage()
     regexp = re.compile("DEBUG zuul\.Pipeline\.[^:]+: .* "
-                        "Adding node request <NodeRequest ([0-9-]+) .* for job "
-                        + args.job + " to item .* " + args.project
-                        + " " + args.change + ".*>")
+                        "Adding node request <NodeRequest ([0-9-]+) .* for job .* "
+                        + args.job + ".* to item .* " + args.project
+                        + ".* " + args.change + ".*>")
 
     start = time.monotonic()
     idx = 0
