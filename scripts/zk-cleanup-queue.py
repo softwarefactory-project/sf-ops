@@ -29,7 +29,15 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--queue', help="provide path to the queue",
                     required=True)
 parser.add_argument('--host', help="Specify zookeeper host",
-                    default='zookeeper')
+                    default='zk01.softwarefactory-project.io:2281')
+parser.add_argument('--no-ssl', help="Disable using SSL",
+                    action='store_true')
+parser.add_argument('--verify_certs', help="Verify SSL cert",
+                    action='store_true')
+parser.add_argument('--keyfile', help="Cert keyfile",
+                    default='/etc/zuul/ssl/zookeeper.key')
+parser.add_argument('--certfile', help="Cert file",
+                    default='/etc/zuul/ssl/zookeeper.crt')
 parser.add_argument('--all', help="Remove all events no matter what is "
                     "the type",
                     action="store_true")
@@ -43,7 +51,14 @@ parser.add_argument('--unlock', help="Remove lock on queue",
                     action="store_true")
 args = parser.parse_args()
 
-client = kazoo.client.KazooClient(hosts=args.host)
+kwargs = {}
+if not args.no_ssl:
+    kwargs['use_ssl'] = not args.no_ssl
+    kwargs['verify_certs'] = args.verify_certs
+    kwargs['keyfile'] = args.keyfile
+    kwargs['certfile'] = args.certfile
+
+client = kazoo.client.KazooClient(hosts=args.host, **kwargs)
 client.start()
 
 events = client.get_children(args.queue)
