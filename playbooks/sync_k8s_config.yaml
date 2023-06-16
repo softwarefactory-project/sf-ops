@@ -1,0 +1,16 @@
+- hosts: nodepool-launcher
+  gather_facts: no
+  vars:
+    user_homes:
+      - /root
+      - /var/lib/nodepool
+  tasks:
+    - name: Copy k8s config
+      copy:
+        src: /etc/software-factory/kubeconfig.yaml
+        dest: "{{ item }}/.kube/config"
+        backup: yes
+        owner: nodepool
+        group: nodepool
+        mode: 0400
+      loop: "{{ user_homes }}"
