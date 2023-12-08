@@ -1,0 +1,16 @@
+zc-web-auth.py can be used to simplify SSO login for zuul-client.
+
+# INSTALL
+
+(adapt to your own needs)
+
+python -m venv ~/zcauth
+source ~/zcauth/bin/activate
+pip install -r requirements.txt
+
+# USAGE EXAMPLE
+
+With the virtualenv activated:
+
+TOKEN=$(./zc-web-auth.py --zuul downstream --tenant tripleo-ci-internal)
+zuulclient --auth-token=$TOKEN ...
