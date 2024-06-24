@@ -14,7 +14,7 @@
 
     - name: Copy aws config
       copy:
-        src: /etc/software-factory/aws.config
+        src: /etc/software-factory/aws
         dest: "{{ item }}/.aws/config"
         owner: nodepool
         group: nodepool
